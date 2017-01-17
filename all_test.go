@@ -258,3 +258,81 @@ func BenchmarkSqrt3(b *testing.B) {
 		x += Sqrt3(y)
 	}
 }
+
+func TestMax(t *testing.T) {
+	inputX := []int{
+		1,
+		-3,
+		5,
+		7,
+		-9,
+	}
+
+	inputY := []int{
+		2,
+		-4,
+		6,
+		-8,
+		10,
+	}
+
+	want := []int{
+		2,
+		-3,
+		6,
+		7,
+		10,
+	}
+
+	for i, _ := range inputX {
+		if n := Max(inputX[i], inputY[i]); n != want[i] {
+			t.Errorf("Max(%d, %d) = %d, want %d", inputX[i], inputY[i], n, want[i])
+		}
+	}
+}
+
+func TestMin(t *testing.T) {
+	inputX := []int{
+		1,
+		-3,
+		5,
+		7,
+		-9,
+	}
+
+	inputY := []int{
+		2,
+		-4,
+		6,
+		-8,
+		10,
+	}
+
+	want := []int{
+		1,
+		-4,
+		5,
+		-8,
+		-9,
+	}
+
+	for i, _ := range inputX {
+		if n := Min(inputX[i], inputY[i]); n != want[i] {
+			t.Errorf("Min(%d, %d) = %d, want %d", inputX[i], inputY[i], n, want[i])
+		}
+	}
+}
+
+func BenchmarkMax(b *testing.B) {
+	x, y := 0, 100
+	for i := 0; i < b.N; i++ {
+		x += Max(x, y)
+	}
+}
+
+func BenchmarkMin(b *testing.B) {
+	x, y := 0, 100
+	for i := 0; i < b.N; i++ {
+		x += Min(x, y)
+	}
+}
